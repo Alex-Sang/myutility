@@ -38,7 +38,7 @@ public class ForsettiService {
     }
 
     public Map<String, String> getForsettiRequests(String offerId){
-
+        System.out.println("=================================================");
         System.out.println("Querying all UpdateOffer Requests for [" + offerId + "]...");
 
         List<JsonNode> allRequestIds = getAllRequestIds();
@@ -73,6 +73,7 @@ public class ForsettiService {
         }
         Collections.reverse(requestList);
 
+        System.out.println("Total " + requestList.size() + " Request(s) found from Bookmaker API wiremock server...");
         for (int i = 0; i < requestList.size(); i++){
             forsettiRequests.put("UpdateOfferRequest_"+i, requestList.get(i));
         }
