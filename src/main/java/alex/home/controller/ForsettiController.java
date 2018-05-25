@@ -16,8 +16,13 @@ public class ForsettiController {
         this.forsettiService = forsettiService;
     }
 
-    @RequestMapping(value = "/forsetti-request/{offerId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/forsetti-requests-all/{offerId}", method = RequestMethod.GET)
     public Map<String, String> getForsettiRequestsQuery(@PathVariable("offerId") String offerId) {
         return forsettiService.getForsettiRequests(offerId);
+    }
+
+    @RequestMapping(value = "/forsetti-request-initial/{offerId}", method = RequestMethod.GET)
+    public Map<String, String> getForsettiRequestsQuery_Initial(@PathVariable("offerId") String offerId) {
+        return forsettiService.getForsettiInitialRequestDetails(offerId);
     }
 }

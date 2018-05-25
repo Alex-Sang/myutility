@@ -77,8 +77,24 @@ public class ForsettiService {
         for (int i = 0; i < requestList.size(); i++){
             forsettiRequests.put("UpdateOfferRequest_"+i, requestList.get(i));
         }
+//        forsettiRequests.put("NumberOfRequests", String.valueOf(requestList.size()));
         return forsettiRequests;
     }
+
+    public Map<String, String> getForsettiInitialRequestDetails(String offerId) {
+
+        Map<String, String> forsettiInitialRequestDetails = new HashMap<>();
+        SOAPBody soapBody;
+        soapBody = getSoapBody(getForsettiRequests(offerId).get("UpdateOfferRequest_0"));
+        String offerId_from_request = soapBody.getElementsByTagName("a:OfferId").item(0).getTextContent();
+        String subEventId_from_request = soapBody.getElementsByTagName("a:SubEventId").item(0).getTextContent();
+
+        forsettiInitialRequestDetails.put("OfferId", offerId_from_request);
+        forsettiInitialRequestDetails.put("SubEventId", subEventId_from_request);
+
+        return forsettiInitialRequestDetails;
+    }
+
 
     private SOAPBody getSoapBody(String body) {
         SOAPBody soapBody = null;
