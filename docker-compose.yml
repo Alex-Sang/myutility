@@ -1,0 +1,11 @@
+version: '3'
+services:
+  myutility:
+    image: myutility:latest
+    ports:
+      - "8182:8182"
+
+  wiremockstudy:
+    image: wiremockstudy:latest
+    ports:
+      - "8181:8181"

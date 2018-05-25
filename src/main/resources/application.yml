@@ -1,0 +1,12 @@
+spring:
+
+wiremockstudy:
+ endpoint: wiremock
+ port: 8181
+
+forsetti:
+ endpoint: localhost
+ port: 8090
+
+server:
+  port: 8182
