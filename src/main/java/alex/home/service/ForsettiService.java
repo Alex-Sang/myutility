@@ -30,7 +30,7 @@ public class ForsettiService {
         this.forsettiConfig = forsettiConfig;
     }
 
-    private URI targetURI(String path){
+    private URI targetUrl(String path){
         return UriComponentsBuilder
                 .fromUriString("http://" + forsettiConfig.getEndpoint() + ":" + forsettiConfig.getPort() + path)
                 .build()
@@ -47,9 +47,8 @@ public class ForsettiService {
         String objectResponseEntity;
 
         for (JsonNode id : allRequestIds) {
-            ResponseEntity<JsonNode> requests = restTemplate.getForEntity(targetURI("/__admin/requests/" + id.asText()), JsonNode.class);
+            ResponseEntity<JsonNode> requests = restTemplate.getForEntity(targetUrl("/__admin/requests/" + id.asText()), JsonNode.class);
             JsonNode jsonResponseDefinition = requests.getBody().get("responseDefinition");
-
             if (jsonResponseDefinition.get("status").asText().equals(String.valueOf(200))) {
                 objectResponseEntity = requests.getBody().get("request").get("body").textValue();
                 bodyList.add(objectResponseEntity);
@@ -61,7 +60,6 @@ public class ForsettiService {
 
         for (String body: bodyList) {
             soapBody = getSoapBody(body);
-
             try{
                 String requestBodyOfferId = soapBody.getElementsByTagName("a:OfferId").item(0).getTextContent();
 
@@ -72,8 +70,6 @@ public class ForsettiService {
                 }
             }catch (NullPointerException ignored) {
             }
-
-
         }
         Collections.reverse(requestList);
 
@@ -101,7 +97,7 @@ public class ForsettiService {
 
     private List<JsonNode> getAllRequestIds() {
         ResponseEntity<JsonNode> responseEntity =
-                restTemplate.getForEntity(targetURI("/__admin/requests"), JsonNode.class);
+                restTemplate.getForEntity(targetUrl("/__admin/requests"), JsonNode.class);
 
         JsonNode bodyNode = responseEntity.getBody().get("requests");
         Iterator<JsonNode> elements = bodyNode.elements();
@@ -110,7 +106,6 @@ public class ForsettiService {
         while (elements.hasNext()) {
             JsonNode node = elements.next();
             JsonNode id = node.get("id");
-
             ids.add(id);
         }
         return ids;
