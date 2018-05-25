@@ -17,7 +17,7 @@ public class ForsettiController {
     }
 
     @RequestMapping(value = "/forsetti-request/{offerId}", method = RequestMethod.GET)
-    public Map<String, String> getForsettiRequestsQuery(@PathVariable("offerId") String eventId) {
-        return forsettiService.getForsettiRequests(eventId);
+    public Map<String, String> getForsettiRequestsQuery(@PathVariable("offerId") String offerId) {
+        return forsettiService.getForsettiRequests(offerId);
     }
 }
