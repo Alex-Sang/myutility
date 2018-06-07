@@ -5,9 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "forsetti")
+@ConfigurationProperties(prefix = "bookManager")
 @Data
-public class ForsettiConfig {
+public class BookManagerConfig {
     private String endpoint;
     private int port;
 }

@@ -4,7 +4,7 @@ wiremockstudy:
  endpoint: wiremock
  port: 8181
 
-forsetti:
+bookManager:
  endpoint: localhost
  port: 8090
 
